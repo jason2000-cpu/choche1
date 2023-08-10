@@ -1,12 +1,17 @@
 import { Text, View } from 'react-native'
 
-import { NativeRouter, Route, Link } from "react-router-native";
+// import { NativeRouter, Route, Link } from "react-router-native";
+
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 import HomeScreen from './Home';
 import Login from '../Login';
 import SignIn from '../SignIn';
 import History from './History';
 import WelcomeScreen from '../Welcome';
+import CustomDrawerNav from './CustomDrawerNav';
 
 
 
@@ -14,23 +19,19 @@ import WelcomeScreen from '../Welcome';
 
 const RouteStack = () => {
   return (
-    <NativeRouter>
-    <View>
-      <View>
-        {/* Define our links. They are like anchor tags */}
-        <Link to="/">
-          <Text>Home</Text>
-        </Link>
-        <Link to="/history">
-          <Text>History</Text>
-        </Link>
-      </View>
-      {/*Define our routes for this project*/}
-      <Route exact path="/" component={HomeScreen} />
-      <Route path="/history" component={History} />
-    </View>
-    {/*The NativeRouter*/}
-  </NativeRouter>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <Stack.Screen
+      name="Home"
+      component={HomeScreen}
+      // options={{title: none}}
+    />
+    <Stack.Screen name="onboard" component={WelcomeScreen}  />
+    <Stack.Screen name="Login" component={Login} />
+    <Stack.Screen name="SignIn" component={SignIn} />
+    <Stack.Screen name="history" component={History} />
+    <Stack.Screen name="CustomDrawerNav" component={CustomDrawerNav} />
+
+  </Stack.Navigator>
   );
 };
 
