@@ -9,31 +9,67 @@ import {
   TextInput
 } from 'react-native';
 
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5, FontAwesome, AntDesign, Fontisto, MaterialIcons  } from '@expo/vector-icons';
 import mapImage from '../../assets/mapImage.png';
 import userImg from '../../assets/amina.jpeg';
 
 const Home = ({ navigation }) => {
-  // const drawer = useRef(null);
-//   const [drawerPosition, setDrawerPosition] = useState('left');
-    const [location, setLocation] = useState('');
+  const drawer = useRef(null);
+  const [drawerPosition, setDrawerPosition] = useState('left');
+  const [location, setLocation] = useState('');
 
   const navigationView = () => (
-    <View style={[styles.navCont, styles.navigationContainer]}>
+    <View style={[styles.navCont, styles.navigationContainer,]}>
         <View style={{flexDirection: 'row', justifyContent: 'flex-end', marginHorizontal: 5}}>
-            <Ionicons name="arrow-back" size={24} color="black" onPress={() => navigation.closeDrawer()}/>
+            <Ionicons name="arrow-back" size={24} color="white" onPress={() => drawer.current.closeDrawer()}/>
         </View>
       <View>
         <View style={{ margin: 10}}>
             {/* <Ionicons name="person" size={35} color="black" /> */}
             <Image source={userImg} style={{height: 50, width: 50, borderRadius: 50}} />
             <View style={{marginLeft: 10}}>
-                <Text style={{fontWeight: 'bold'}}>Amina</Text>
+                <Text style={{fontWeight: 'bold', color:'white', marginVertical: 10}}>Amina</Text>
             </View>
         </View>
-        <View style={{flexDirection: 'row', borderWidth: 1, width: 70, marginHorizontal: 10, backgroundColor: 'white', borderRadius: 10}}>
-            <Text>Change</Text>
-            <Ionicons name="pencil" size={15} color="black" />
+        <View style={{flexDirection: 'row', borderWidth: 1, width: 100,justifyContent:'space-between', marginHorizontal: 10, backgroundColor: 'white', borderRadius: 10,parddingVertical: 10, paddingHorizontal: 5, alignItems:'center'}}>
+            <Text style={{fontSize: 15}}>Change</Text>
+            <FontAwesome5 name="edit" size={24} color="black" />
+        </View>
+        <View style={{backgroundColor:'#009245',height:170, marginVertical: 15, paddingVertical: 10, paddingHorizontal: 20 }}>
+          <View style={{flexDirection:'row',}}>
+            <FontAwesome5 name="coins" size={24} color="white" />
+            <Text style={{color: 'white', fontSize: 18, marginLeft: 5}}>Current Balance</Text>
+          </View>
+          <View style={{marginLeft: 10, marginVertical: 10}}>
+            <Text style={{fontSize: 25, fontWeight: 'bold'}}>6,500 Points</Text>
+          </View>
+          <View style={{ marginLeft: 10}}>
+            <Text style={{fontSize: 15, }}>Due 26th April 2023</Text>
+          </View>
+        </View>
+        <View>
+          <View style={styles.nav}>
+             <FontAwesome name="home" size={24} color="red" />
+             <Text style={styles.IconText}>Home</Text>
+          </View>
+          <View style={styles.nav}>
+                <FontAwesome5 name="history" size={24} color="red" />
+                <Text style={styles.IconText}>History</Text>
+          </View>
+        </View>
+        <View>
+          <View style={styles.nav}>
+              <FontAwesome5 name="cog" size={24} color="red" />
+              <Text style={styles.IconText}>Settings</Text>
+          </View>
+          <View style={styles.nav}>
+              <MaterialIcons name="support-agent" size={24} color="red" />
+              <Text style={styles.IconText}>Online Support</Text>
+          </View>
+          <View style={styles.nav}>
+              <FontAwesome5 name="sign-out-alt" size={24} color="red" />
+              <Text style={styles.IconText}>Logout</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -41,18 +77,19 @@ const Home = ({ navigation }) => {
 
   return (
     <DrawerLayoutAndroid
-      // ref={drawer}
+      ref={drawer}
       drawerWidth={300}
+      drawerPosition='left'
       renderNavigationView={navigationView}>
       <View style={styles.container}>
       <View style={{position:'absolute', zIndex: 1, margin: 10}}>
-         <Ionicons name="md-menu-outline" size={24} color="white" onPress={() => navigation.openDrawer()} />
+         <Ionicons name="md-menu-outline" size={24} color="white" onPress={() => drawer.current.openDrawer()} />
       </View>
         <View style={{flex: 1}}>
             <Image source={mapImage} style={{height: 500}} />
         </View>
         <View style={styles.bottom}>
-            <Text style={{color: 'black', fontSize: 30}}>Good Morning Amina</Text>
+            <Text style={{color: 'black', fontSize: 30, fontWeight: 'bold'}}>Good Morning Amina</Text>
             <View>
                 <TextInput
                     placeholder="Where to?"
@@ -82,11 +119,11 @@ const Home = ({ navigation }) => {
         </View>
         <View style={styles.btm}>
             <View style={{flexDirection: 'row',}}>
-                <Ionicons name="timer-outline" size={35} color="black" />
-                <Text style={{ marginTop: 6, marginLeft: 10}}>Favorites</Text>
+                <Fontisto name="favorite" size={24} color="black"  style={{marginTop: 10}} />
+                <Text style={{ marginTop: 6, marginLeft: 10, fontWeight: 'bold'}}>Favorites</Text>
             </View>
             <View style={{flexDirection: 'row', marginTop: 20}}>
-                <Ionicons name="timer-outline" size={35} color="black" />
+                <MaterialIcons name="work" size={24} color="black"  style={{marginTop: 10}}/>
                 <View style={{marginTop: 6, marginLeft: 10,}}>
                    <Text style={{  fontWeight: 'bold'}}>Work</Text>
                    <Text>Astrol Petrol Station Eastern Bypass Embakasi</Text>
@@ -109,16 +146,15 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    // marginTop: 20,
+    marginTop: 20,
     // alignItems: 'center',
     // justifyContent: 'center',
     // padding: 10,
   },
-  navCont: {
-    marginTop: 20,
-  },
   navigationContainer: {
-    backgroundColor: '#ecf0f1',
+    marginTop: 20,
+    backgroundColor: '#080d0a',
+    height: '100%',
   },
   textInput: {
     height: 40,
@@ -153,6 +189,17 @@ const styles = StyleSheet.create({
         padding: 10,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
+      },
+      IconText: {
+        fontSize: 18,
+        fontWeight:'bold',
+        color: 'white',
+        marginLeft: 10,
+        // marginTop: 5
+      },
+      nav: {
+        marginTop: 20,
+        flexDirection: 'row'
       }
 });
 
